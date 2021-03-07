@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import "./App.css";
 import React, { Component } from "react";
 import { authEndpoint, clientId, redirectUri, scopes } from "./components/config.js";
@@ -87,17 +87,21 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {!this.state.token && (
-            <a
-              className="btn btn--loginApp-link"
-              href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
-                "%20"
-              )}&response_type=token&show_dialog=true`}
-            >
-              Login to Spotify
-            </a>
-          )}
+          <div className="Title">
+            <h1> Welcome </h1>
+          </div>
+          <button class="button Login">
+            {!this.state.token && (
+              <a
+                className="btn btn--loginApp-link"
+                href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
+                  "%20"
+                )}&response_type=token&show_dialog=true`}
+              >
+              Click This Button To Login to Spotify
+              </a>
+            )}
+          </button>
           {this.state.token && !this.state.no_data && (
             <Player
               item={this.state.item}
