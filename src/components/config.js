@@ -1,6 +1,6 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
-export const clientId = "ID";
+export const clientId = "clientId";
 export const redirectUri = "http://localhost:3000/callback/";
 export const scopes = [
     "user-top-read",
