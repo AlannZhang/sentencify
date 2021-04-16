@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as $ from 'jquery';
 import { Button, Form } from 'react-bootstrap';
-import { authEndpoint, clientId, redirectUri, scopes } from './config.js';
+import { authEndpoint, redirectUri, scopes } from './config.js';
 import hash from './hash';
 require('dotenv').config();
 
@@ -9,8 +9,8 @@ const LoginScreen = () => {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
-
-  const authUri = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=`
+  
+  const authUri = `${authEndpoint}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${redirectUri}&scope=`
   const scopesUri = `${scopes.join('%20')}&response_type=token&show_dialog=true`;
   const uri = `${authUri}${scopesUri}`
   let formArr;
