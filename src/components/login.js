@@ -15,31 +15,12 @@ const LoginScreen = () => {
   const uri = `${authUri}${scopesUri}`
   let formArr;
 
-  /*
-  const tick = () => {
-    if(token) {
-      createPlaylist(token);
-    }
-  }
-  */
-
   useEffect(() => {
     let _token = hash.access_token;
 
     if (_token) {
-      // Set token
       setToken(_token);
     }
-
-    // set interval for polling every 5 seconds
-    
-    /*
-    const interval = setInterval(() => tick(), 5000);
-
-    return () => {
-      clearInterval(interval);
-    }
-    */
   }, []);
 
   const getUserInfo = () => {
@@ -50,7 +31,6 @@ const LoginScreen = () => {
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
       },
       success: data => {
-        console.log(data.id);
         setUserId(data.id);
         createPlaylist();
       }
