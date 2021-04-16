@@ -9,7 +9,6 @@ const LoginScreen = () => {
   const [token, setToken] = useState('');
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
-  const [noData, setNoData] = useState(false);
 
   const authUri = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=`
   const scopesUri = `${scopes.join('%20')}&response_type=token&show_dialog=true`;
