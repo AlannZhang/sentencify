@@ -79,7 +79,8 @@ const LoginScreen = () => {
       <div>
         {token && (
           <Form name='testform' onSubmit={onSubmit}>
-            <input type='text' 
+            <input 
+              type='text' 
               required
               className='form' 
               value={formData}
