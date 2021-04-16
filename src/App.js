@@ -1,13 +1,11 @@
-// import logo from './logo.svg';
-import "./App.css";
-import React, { Component } from "react";
+// import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginScreen from './components/login.js';
 
-class App extends Component {
-  render() {
-    return <LoginScreen />;
-  }
-}
+const App = () => (
+  <div>
+    <LoginScreen />
+  </div>
+);
 
 export default App;
