@@ -43,7 +43,7 @@ const LoginScreen = () => {
       type: 'POST',
       data: {
         'name': `${formData}`,
-        'description': 'Playlist generated from the spotify playlist generator app',
+        'description': 'Playlist generated from the sentencify app',
         'public': false,
       },
       processData: false,
