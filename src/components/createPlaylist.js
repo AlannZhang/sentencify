@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Form, Row } from 'react-bootstrap';
 require('dotenv').config();
@@ -9,25 +9,27 @@ const CreatePlaylist = () => {
   const [formData, setFormData] = useState('');
   let formArr;
 
-  // console.log(token);
-
-  const getUserInfo = async () => {
-    try {
-      const reqParams = {
-        method: 'get',
-        url: 'https://api.spotify.com/v1/me',
-        headers: {
-          'Authorization': `Bearer ${token}`,
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const reqParams = {
+          method: 'get',
+          url: 'https://api.spotify.com/v1/me',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
         }
-      }
 
-      const results = await axios(reqParams);
-      console.log(results.data.id);
-      setUserId(results.data.id)
-    } catch (err) {
-      console.error(err);
+        const results = await axios(reqParams);
+        console.log(results.data.id);
+        setUserId(results.data.id)
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
+
+    getUserInfo();
+  }, []);
     
   const createPlaylist = async () => {
     try {
@@ -40,13 +42,12 @@ const CreatePlaylist = () => {
         data: {
           'name': `${formData}`,
           'description': 'Playlist generated from the sentencify app',
-          'public': false,
+          'public': true,
         }
       }
 
       const results = await axios(reqParams);
       console.log(results);
-      setUserId(results)
     } catch (err) {
       console.error(err);
     }
@@ -54,9 +55,8 @@ const CreatePlaylist = () => {
     
   const onSubmit = (e) => {
     e.preventDefault();
-    formArr = formData.split(' ');
-    console.log(formArr);
-    getUserInfo();
+    console.log(formData);
+    createPlaylist();
   };
 
   return (

@@ -1,11 +1,11 @@
 import { React } from 'react';
 import { Button, Container, Row } from 'react-bootstrap';
-import { authEndpoint, redirectUri } from './config';
+import { authEndpoint, redirectUri, scopes } from './config';
 require('dotenv').config();
 
 const LoginScreen = () => {
   const authUri = `${authEndpoint}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${redirectUri}`
-  const responseUri = `&response_type=token&show_dialog=true`;
+  const responseUri = `&scope=${scopes}&response_type=token&show_dialog=true`;
   const uri = `${authUri}${responseUri}`
 
   return (
