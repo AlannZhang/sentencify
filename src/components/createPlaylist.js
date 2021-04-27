@@ -2,7 +2,6 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Form, Row, Col, ListGroup } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-require('dotenv').config();
 
 const CreatePlaylist = () => {
   const history = useHistory();
@@ -158,9 +157,11 @@ const CreatePlaylist = () => {
           {songNames.map((item) => (
             <ListGroup.Item>Song: {item}</ListGroup.Item>
           ))}
+          {/*
           {artistNames.map((item) => (
             <ListGroup.Item>Artist: {item}</ListGroup.Item>
           ))}
+          */}
         </ListGroup>
       </Row>
     </>

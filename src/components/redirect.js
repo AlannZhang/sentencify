@@ -15,6 +15,8 @@ const RedirectPage = () => {
           localStorage.setItem('token', JSON.stringify(token));
           console.log(token);
           history.push('/create');
+        } else {
+          history.push('/');
         }
       } catch (error) {
         console.error(error);
