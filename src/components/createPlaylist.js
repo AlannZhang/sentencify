@@ -31,7 +31,7 @@ const CreatePlaylist = () => {
         }
 
         const results = await axios(reqParams);
-        setUserId(results.data)
+        setUserId(results.data.id)
       } catch (err) {
         console.error(err);
       }
@@ -39,51 +39,6 @@ const CreatePlaylist = () => {
 
     getUserInfo();
   }, []);
-    
-  // create the playlist with name set as form input
-  const createPlaylist = async () => {
-    try {
-      const reqParams = {
-        method: 'post',
-        url: `https://api.spotify.com/v1/users/${userId}/playlists`,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        data: {
-          'name': `${formData}`,
-          'description': 'Playlist generated from the sentencify app',
-          'public': true,
-        },
-        mode: 'no-cors'
-      }
-
-      const results = await axios(reqParams);
-      console.log(results.data.id);
-      setPlaylistId(results.data.id);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  // add songs to the playlist
-  const addSongs = async () => {
-    try {
-      for (let i = 0; i < songUri.length; i++) {
-        const reqParams = {
-          method: 'post',
-          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=${i}&uris=${songUri[i]}`,
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          }
-        };
-
-        const results = await axios(reqParams);
-        console.log(results);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   // search for songs based on each word from the form input
   const getSongs = async () => {
@@ -107,10 +62,50 @@ const CreatePlaylist = () => {
           setArtistNames((arr) => [...arr, results.data.tracks.items[randomSong].artists[j].name]);
         }
       }
-
-      addSongs();
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  // add songs to the playlist
+  const addSongs = async () => {
+    console.log(userId);
+    try {
+      for (let i = 0; i < songUri.length; i++) {
+        const reqParams = {
+          method: 'post',
+          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=${i}&uris=${songUri[i]}`,
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        };
+
+        const results = await axios(reqParams);
+        console.log(results);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // create the playlist with name set as form input
+  const createPlaylist = async () => {
+    try {
+      const reqParams = {
+        method: 'post',
+        url: `http://localhost:8000/createPlaylist/${userId}`,
+        data: {
+          'formData': `${formData}`,
+          'token': `${token}`
+        }
+      }
+
+      const results = await axios(reqParams);
+      // console.log(results.data);
+      setPlaylistId(results.data);
+      addSongs();
+    } catch (err) {
+      console.error(err);
     }
   };
     
@@ -163,13 +158,8 @@ const CreatePlaylist = () => {
         )}
         <ListGroup>
           {songNames.map((item) => (
-            <ListGroup.Item>Song: {item}</ListGroup.Item>
+            <ListGroup.Item>{item}</ListGroup.Item>
           ))}
-          {/*
-          {artistNames.map((item) => (
-            <ListGroup.Item>Artist: {item}</ListGroup.Item>
-          ))}
-          */}
         </ListGroup>
       </Row>
     </>
