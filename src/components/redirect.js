@@ -12,11 +12,8 @@ const RedirectPage = () => {
       try {  
         if (retrievedToken) {
           const token = retrievedToken;
-          // const expiryTime = new Date().getTime() + token.expires_in * 1000;
-          // localStorage.setItem('expiry_time', expiryTime);
           localStorage.setItem('token', JSON.stringify(token));
           console.log(token);
-          // console.log(expiryTime);
           history.push('/create');
         }
       } catch (error) {

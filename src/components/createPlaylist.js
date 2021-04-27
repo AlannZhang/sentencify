@@ -7,7 +7,6 @@ const CreatePlaylist = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
-  let formArr;
 
   useEffect(() => {
     const getUserInfo = async () => {
