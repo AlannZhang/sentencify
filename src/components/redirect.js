@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import hash from './functions/hash';
+import hash from './hash';
 
 const RedirectPage = () => {
   const history = useHistory();
@@ -13,7 +13,6 @@ const RedirectPage = () => {
         if (retrievedToken) {
           const token = retrievedToken;
           localStorage.setItem('token', JSON.stringify(token));
-          console.log(token);
           history.push('/create');
         }
       } catch (error) {

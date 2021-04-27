@@ -7,6 +7,8 @@ const CreatePlaylist = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
+  // const [formArr, setFormArr] = useState([]);
+  let formArr = [];
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -20,7 +22,6 @@ const CreatePlaylist = () => {
         }
 
         const results = await axios(reqParams);
-        console.log(results.data.id);
         setUserId(results.data.id)
       } catch (err) {
         console.error(err);
@@ -54,15 +55,18 @@ const CreatePlaylist = () => {
     
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    formArr = formData.split(' ');
+    console.log(formArr);
     createPlaylist();
   };
 
   return (
-    <Row className='justify-content-center'>
-      <h1 style={{textAlign: 'center', margin: '30px auto auto'}}> Setencify </h1>
-      <div className='col-md-4 col-md-offset-5 align-center'>
-        <Form name='testform' onSubmit={onSubmit}>
+    <>
+      <Row className='justify-content-center'>
+        <h1 style={{textAlign: 'center', margin: '30px auto auto'}}> Setencify </h1>
+      </Row>
+      <Row className='justify-content-center' style={{margin: '100px auto auto'}}>
+      <Form name='testform' onSubmit={onSubmit}>
           <input 
             type='text' 
             required
@@ -72,8 +76,8 @@ const CreatePlaylist = () => {
             placeholder='Type a sentence...'
           />
         </Form>
-      </div>
-    </Row>
+      </Row>
+    </>
   )
 
 };

@@ -9,7 +9,7 @@ const LoginScreen = () => {
   const uri = `${authUri}${responseUri}`
 
   return (
-    <Container>
+    <>
       <Row className='d-flex justify-content-center align-items-center'>
         <h1 style={{textAlign: 'center', margin: '200px auto auto'}}> Sentencify</h1>
       </Row>
@@ -25,7 +25,7 @@ const LoginScreen = () => {
           </Button>
         </div>
       </Row>
-    </Container>
+    </>
   );
 }
 
