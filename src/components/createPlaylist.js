@@ -18,6 +18,8 @@ const CreatePlaylist = () => {
 
   // get user id on render
   useEffect(() => {
+    document.body.style.backgroundColor = '#becf94be';
+
     const getUserInfo = async () => {
       try {
         const reqParams = {
@@ -51,7 +53,8 @@ const CreatePlaylist = () => {
           'name': `${formData}`,
           'description': 'Playlist generated from the sentencify app',
           'public': true,
-        }
+        },
+        mode: 'no-cors'
       }
 
       const results = await axios(reqParams);
@@ -67,8 +70,8 @@ const CreatePlaylist = () => {
     try {
       for (let i = 0; i < songUri.length; i++) {
         const reqParams = {
-          method: 'post', 
-          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=${i}&uris=${songUri}`,
+          method: 'post',
+          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=${i}&uris=${songUri[i]}`,
           headers: {
             'Authorization': `Bearer ${token}`,
           }
@@ -128,17 +131,22 @@ const CreatePlaylist = () => {
   return (
     <>
       <Row className='justify-content-center'>
-        <Col md={12}>
-          <h1 style={{textAlign: 'center', margin: '30px auto auto'}}> Setencify </h1>
-        </Col>
-        <Col>
-          <Button
-            variant='link'
-            onClick={logOut}
-          >
-            Logout
-          </Button>
-        </Col>
+        <h1 style={{textAlign: 'center', margin: '30px auto auto'}}> Setencify </h1>
+        <style type="text/css">
+          {`
+          .btn-logout {
+            color: #006600;
+          }
+          `}
+        </style>
+        <Button
+          className='bg-transparent font-weight-bold'
+          variant='logout'
+          onClick={logOut}
+          style={{ textDecoration: 'none' }}
+        >
+          Logout
+        </Button>
       </Row>
       <Row className='justify-content-center' style={{margin: '100px auto auto'}}>
         {showForm && (

@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect } from 'react';
 import { Button, Row } from 'react-bootstrap';
 import { authEndpoint, redirectUri, scopes } from './config';
 require('dotenv').config();
@@ -8,15 +8,19 @@ const LoginScreen = () => {
   const responseUri = `&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
   const uri = `${authUri}${responseUri}`
 
+  useEffect(() => {
+    document.body.style.backgroundColor = '#becf94be';
+  });
+
   return (
     <>
-      <Row className='d-flex justify-content-center align-items-center'>
+      <Row className='justify-content-center' style={{display:'flex'}}>
         <h1 style={{textAlign: 'center', margin: '200px auto auto'}}> Sentencify</h1>
       </Row>
       <Row className='d-flex justify-content-center align-items-center' style={{margin: '50px auto auto'}}>
         <div className='d-flex justify-content-center'>
           <Button 
-            className='btn btn-default text-center' 
+            className='btn btn-default text-center rounded-pill' 
             size='lg' 
             variant='success' 
             onClick={() => window.location = uri}
