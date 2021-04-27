@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const LoginScreen = () => {
   const authUri = `${authEndpoint}?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${redirectUri}`
-  const responseUri = `&scope=${scopes}&response_type=token&show_dialog=true`;
+  const responseUri = `&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
   const uri = `${authUri}${responseUri}`
 
   return (

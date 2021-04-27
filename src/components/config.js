@@ -3,4 +3,5 @@ export const redirectUri = 'http://localhost:3000/callback';
 export const scopes = [
   'playlist-modify',
   'playlist-modify-private',
+  'user-read-private',
 ];

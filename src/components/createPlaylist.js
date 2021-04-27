@@ -7,7 +7,6 @@ const CreatePlaylist = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
-  // const [formArr, setFormArr] = useState([]);
   let formArr = [];
 
   useEffect(() => {
@@ -52,12 +51,37 @@ const CreatePlaylist = () => {
       console.error(err);
     }
   };
+
+  const getSongs = async () => {
+    try {
+      for (let i = 0; i < formArr.length; i++) {
+        const reqParams = {
+          method: 'get',
+          url: 'https://api.spotify.com/v1/search',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          data: {
+            q: `${formArr[i]}`,
+            type: 'track',
+            limit: '10',
+          }
+        }
+
+        console.log(formArr[i]);
+        const results = await axios(reqParams);
+        console.log(results);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
     
   const onSubmit = (e) => {
     e.preventDefault();
     formArr = formData.split(' ');
-    console.log(formArr);
-    createPlaylist();
+    // createPlaylist();
+    getSongs();
   };
 
   return (

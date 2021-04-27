@@ -13,6 +13,7 @@ const RedirectPage = () => {
         if (retrievedToken) {
           const token = retrievedToken;
           localStorage.setItem('token', JSON.stringify(token));
+          console.log(token);
           history.push('/create');
         }
       } catch (error) {
