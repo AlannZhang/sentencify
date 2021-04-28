@@ -40,7 +40,7 @@ const CreatePlaylist = () => {
     }
 
     getUserInfo();
-  }, []);
+  });
 
   // search for songs based on each word from the form input
   const getSongs = async () => {

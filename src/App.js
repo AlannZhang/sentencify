@@ -8,7 +8,7 @@ import RedirectPage from './components/redirect';
 const App = () => (
   <div>
     <Router>
-    <Container fluid>
+    <Container fluid style={{ paddingLeft: 10, paddingRight: 10 }}>
       <div className="main">
         <Switch>
           <Route exact path='/' component={LoginScreen} />
