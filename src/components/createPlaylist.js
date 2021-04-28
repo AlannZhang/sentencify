@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Form, Row, Col, Table, Fade } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
@@ -17,8 +17,6 @@ const CreatePlaylist = () => {
   const [showSongs, setShowSongs] = useState(false);
   const randomSong = Math.floor(Math.random() * 20);
   let formArr = [];
-  const myRef = useRef(null)
-  const executeScroll = () => myRef.current.scrollIntoView()
 
   // get user id on render
   useEffect(() => {
@@ -149,7 +147,7 @@ const CreatePlaylist = () => {
         {showForm && (
           <h5 style={{textAlign: 'center', margin: '100px auto auto'}}>
             Welcome to Sentencify, type a sentence to generate a playlist.
-            <br/> Each song that is added represents a word from your sentence...
+            <br/> Each song that is added represents a word from your sentence.
           </h5>
         )}
       </Row>
@@ -174,15 +172,14 @@ const CreatePlaylist = () => {
           />
           </Form>
         )}
-        <Fade in={showSongs}>
-          <Table
-            className="table"
-            style={{ width: '45%', margin: '20px auto' }}
-            bg-transparent 
-            borderless
-            responsive
-            ref={myRef}
-          >
+        <Table
+          className='table'
+          style={{ width: '45%', margin: '20px auto' }}
+          bg-transparent 
+          borderless
+          responsive
+        >
+         <Fade in={showSongs}>
             <tbody>
               {songs.map((item) => (
                 <tr key={item.id}>
@@ -199,15 +196,15 @@ const CreatePlaylist = () => {
                 </tr>
               ))}
             </tbody>
-          </Table>
-        </Fade>
+          </Fade>
+        </Table>
       </Row>
       <Row className='justify-content-center' style={{margin: '50px auto auto'}}>
         {showPlaylist && (
           <Button
             className='bg-transparent font-weight-bold'
             variant='logout'
-            style={{ textDecoration: 'none', margin: '30px auto auto' }}
+            style={{ textDecoration: 'none'}}
             onClick={() => window.open(playlistUrl, '_blank')}
           >
             <h5>Click here to view your playlist</h5>
