@@ -18,7 +18,10 @@ router.post('/:userId', (async (req, res) => {
 
     const results = await axios(reqParams);
     console.log(results.data);
-    res.send(results.data.id);
+    res.send({
+      id: results.data.id,
+      url: results.data.external_urls.spotify,
+    });
   } catch (err) {
     console.error(err);
   }

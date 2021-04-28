@@ -10,7 +10,7 @@ import RedirectPage from './components/redirect';
 const App = () => (
   <div>
     <Router>
-    <Container>
+    <Container fluid>
       {/* <NavBar /> */}
       <div className="main">
         <Switch>

@@ -8,11 +8,13 @@ const CreatePlaylist = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
-  const [songUri, setSongUri] = useState([])
-  const [songNames, setSongNames] = useState([]);
+  let songUri = [];
+  const [songs, setSongs] = useState([]);
   const [artistNames, setArtistNames] = useState([]);
-  const [playlistId, setPlaylistId] = useState('');
+  let playlistId;
+  const [playlistUrl, setPlaylistUrl] = useState('');
   const [showForm, setShowForm] = useState(true);
+  const [showPlaylist, setShowPlaylist] = useState(false);
   const randomSong = Math.floor(Math.random() * 20);
   let formArr = [];
 
@@ -53,8 +55,9 @@ const CreatePlaylist = () => {
         };
 
         const results = await axios(reqParams);
-        setSongUri((arr) => [...arr, results.data.tracks.items[randomSong].uri]);
-        setSongNames((arr) => [...arr, results.data.tracks.items[randomSong].name]);
+        // setSongUri((arr) => [...arr, results.data.tracks.items[randomSong].uri]);
+        songUri.push(results.data.tracks.items[randomSong].uri);
+        setSongs((arr) => [...arr, results.data.tracks.items[randomSong]]);
         console.log(`Song: ${results.data.tracks.items[randomSong].name}`);
 
         for (let j = 0; j < results.data.tracks.items[randomSong].artists.length; j++) {
@@ -69,7 +72,7 @@ const CreatePlaylist = () => {
 
   // add songs to the playlist
   const addSongs = async () => {
-    console.log(userId);
+    console.log(playlistId);
     try {
       for (let i = 0; i < songUri.length; i++) {
         const reqParams = {
@@ -82,6 +85,7 @@ const CreatePlaylist = () => {
 
         const results = await axios(reqParams);
         console.log(results);
+        setShowPlaylist(true);
       }
     } catch (error) {
       console.error(error);
@@ -101,8 +105,9 @@ const CreatePlaylist = () => {
       }
 
       const results = await axios(reqParams);
-      // console.log(results.data);
-      setPlaylistId(results.data);
+      console.log(results);
+      playlistId = results.data.id;
+      setPlaylistUrl(results.data.url);
       addSongs();
     } catch (err) {
       console.error(err);
@@ -125,25 +130,29 @@ const CreatePlaylist = () => {
 
   return (
     <>
-      <Row className='justify-content-center'>
-        <h1 style={{textAlign: 'center', margin: '30px auto auto'}}> Setencify </h1>
-        <style type="text/css">
-          {`
-          .btn-logout {
-            color: #006600;
-          }
-          `}
-        </style>
-        <Button
-          className='bg-transparent font-weight-bold'
-          variant='logout'
-          onClick={logOut}
-          style={{ textDecoration: 'none' }}
-        >
-          Logout
-        </Button>
+      <Row>
+        <Col className='d-flex flex-row'>
+          <h1 style={{textAlign: 'center', margin: '20px auto auto'}}> Setencify </h1>
+        </Col>
+        <Col className='d-flex flex-row-reverse'>
+          <style type='text/css'>
+            {`
+            .btn-logout {
+              color: #006600;
+            }
+            `}
+          </style>
+          <Button
+            className='bg-transparent font-weight-bold'
+            variant='logout'
+            onClick={logOut}
+            style={{ textDecoration: 'none', margin: '30px auto auto' }}
+          >
+            Logout
+          </Button>
+        </Col>
       </Row>
-      <Row className='justify-content-center' style={{margin: '100px auto auto'}}>
+      <Row className='justify-content-center' style={{margin: '150px auto auto'}}>
         {showForm && (
           <Form name='testform' onSubmit={onSubmit}>
             <input 
@@ -156,11 +165,32 @@ const CreatePlaylist = () => {
           />
           </Form>
         )}
-        <ListGroup>
-          {songNames.map((item) => (
-            <ListGroup.Item>{item}</ListGroup.Item>
+        <ListGroup className='d-flex justify-content-between align-items-center'>
+          {songs.map((item) => (
+            <>
+              <ListGroup.Item className='bg-transparent borderless' style={{ border: 'none' }}>
+                <>
+                  <div className='float-left mr-5 ' style={{ margin: '20px auto auto' }}>
+                    {item.name}
+                  </div>
+                  <img src={item.album.images[2].url} alt='song cover art' className='float-right'/>
+                </>
+              </ListGroup.Item>
+            </>
           ))}
         </ListGroup>
+      </Row>
+      <Row className='justify-content-center' style={{margin: '50px auto auto'}}>
+        {showPlaylist && (
+          <Button
+            className='bg-transparent font-weight-bold'
+            variant='logout'
+            style={{ textDecoration: 'none', margin: '30px auto auto' }}
+            onClick={() => window.open(playlistUrl, '_blank')}
+          >
+            <h5>Click here to view your playlist</h5>
+          </Button>
+        )}
       </Row>
     </>
   );
