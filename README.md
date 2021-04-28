@@ -4,6 +4,11 @@ A web application using the Spotify API that will allow you to create a playlist
 
 # Instructions
 
+Run the following command to install dependencies: 
+```sh 
+npm i
+```
+
 Run the following command to locally start the web app:
 ```sh
 npm start
