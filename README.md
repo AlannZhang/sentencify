@@ -18,13 +18,13 @@ nodemon server.js
 # Current Screenshots 
 
 Login Page:
-![alt text](https://github.com/AlannZhang/sentencify/blob/master/Screenshots/login.png?raw=true)
+![alt text](https://github.com/AlannZhang/sentencify/blob/master/screenshots/login.png?raw=true)
 
 Spotify Authentication:
-![alt text](https://github.com/AlannZhang/sentencify/blob/master/Screenshots/authentication.png?raw=true)
+![alt text](https://github.com/AlannZhang/sentencify/blob/master/screenshots/authentication.png?raw=true)
 
 Sentence Form: 
-![alt text](https://github.com/AlannZhang/sentencify/blob/master/Screenshots/form.png?raw=true)
+![alt text](https://github.com/AlannZhang/sentencify/blob/master/screenshots/form.png?raw=true)
 
 Playlist Songs View:
-![alt text](https://github.com/AlannZhang/sentencify/blob/master/Screenshots/songs.png?raw=true)
+![alt text](https://github.com/AlannZhang/sentencify/blob/master/screenshots/songs.png?raw=true)
