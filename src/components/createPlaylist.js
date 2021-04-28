@@ -10,7 +10,7 @@ const CreatePlaylist = () => {
   const [formData, setFormData] = useState('');
   let songUri = [];
   const [songs, setSongs] = useState([]);
-  const [artistNames, setArtistNames] = useState([]);
+  // const [artistNames, setArtistNames] = useState([]);
   let playlistId;
   const [playlistUrl, setPlaylistUrl] = useState('');
   const [showForm, setShowForm] = useState(true);
@@ -55,14 +55,11 @@ const CreatePlaylist = () => {
         };
 
         const results = await axios(reqParams);
-        // setSongUri((arr) => [...arr, results.data.tracks.items[randomSong].uri]);
         songUri.push(results.data.tracks.items[randomSong].uri);
         setSongs((arr) => [...arr, results.data.tracks.items[randomSong]]);
-        console.log(`Song: ${results.data.tracks.items[randomSong].name}`);
 
         for (let j = 0; j < results.data.tracks.items[randomSong].artists.length; j++) {
-          console.log(`Artist: ${results.data.tracks.items[randomSong].artists[j].name}`);
-          setArtistNames((arr) => [...arr, results.data.tracks.items[randomSong].artists[j].name]);
+          // setArtistNames((arr) => [...arr, results.data.tracks.items[randomSong].artists[j].name]);
         }
       }
     } catch (error) {
@@ -72,7 +69,6 @@ const CreatePlaylist = () => {
 
   // add songs to the playlist
   const addSongs = async () => {
-    console.log(playlistId);
     try {
       for (let i = 0; i < songUri.length; i++) {
         const reqParams = {
@@ -83,8 +79,7 @@ const CreatePlaylist = () => {
           }
         };
 
-        const results = await axios(reqParams);
-        console.log(results);
+        await axios(reqParams);
         setShowPlaylist(true);
       }
     } catch (error) {
@@ -105,7 +100,6 @@ const CreatePlaylist = () => {
       }
 
       const results = await axios(reqParams);
-      console.log(results);
       playlistId = results.data.id;
       setPlaylistUrl(results.data.url);
       addSongs();

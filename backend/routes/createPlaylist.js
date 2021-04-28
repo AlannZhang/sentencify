@@ -3,6 +3,8 @@ const axios = require('axios');
 
 router.post('/:userId', (async (req, res) => {
   try {
+    // sending the playlist creation request from the backend
+    // due to cors issues in the frontend
     const reqParams = {
       method: 'post',
       url: `https://api.spotify.com/v1/users/${req.params.userId}/playlists`,
