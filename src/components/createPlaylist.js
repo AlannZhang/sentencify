@@ -1,6 +1,6 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Button, Form, Row, Col, ListGroup } from 'react-bootstrap';
+import { Button, Form, Row, Col, Table, Fade } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const CreatePlaylist = () => {
@@ -10,13 +10,15 @@ const CreatePlaylist = () => {
   const [formData, setFormData] = useState('');
   let songUri = [];
   const [songs, setSongs] = useState([]);
-  // const [artistNames, setArtistNames] = useState([]);
   let playlistId;
   const [playlistUrl, setPlaylistUrl] = useState('');
   const [showForm, setShowForm] = useState(true);
   const [showPlaylist, setShowPlaylist] = useState(false);
+  const [showSongs, setShowSongs] = useState(false);
   const randomSong = Math.floor(Math.random() * 20);
   let formArr = [];
+  const myRef = useRef(null)
+  const executeScroll = () => myRef.current.scrollIntoView()
 
   // get user id on render
   useEffect(() => {
@@ -57,10 +59,7 @@ const CreatePlaylist = () => {
         const results = await axios(reqParams);
         songUri.push(results.data.tracks.items[randomSong].uri);
         setSongs((arr) => [...arr, results.data.tracks.items[randomSong]]);
-
-        for (let j = 0; j < results.data.tracks.items[randomSong].artists.length; j++) {
-          // setArtistNames((arr) => [...arr, results.data.tracks.items[randomSong].artists[j].name]);
-        }
+        setShowSongs(true);
       }
     } catch (error) {
       console.error(error);
@@ -140,39 +139,68 @@ const CreatePlaylist = () => {
             className='bg-transparent font-weight-bold'
             variant='logout'
             onClick={logOut}
-            style={{ textDecoration: 'none', margin: '30px auto auto' }}
+            style={{ textDecoration: 'none', margin: '35px auto auto' }}
           >
             Logout
           </Button>
         </Col>
       </Row>
-      <Row className='justify-content-center' style={{margin: '150px auto auto'}}>
+      <Row>
+        {showForm && (
+          <h5 style={{textAlign: 'center', margin: '100px auto auto'}}>
+            Welcome to Sentencify, type a sentence to generate a playlist.
+            <br/> Each song that is added represents a word from your sentence...
+          </h5>
+        )}
+      </Row>
+      <Row className='justify-content-center' style={{margin: '80px auto auto'}}>
+        <style type='text/css'>
+          {`
+          .input{
+            width: 200%;
+          }
+          `}
+        </style>
         {showForm && (
           <Form name='testform' onSubmit={onSubmit}>
             <input 
               type='text' 
               required
-              className='form' 
+              className='border border-light rounded' 
               value={formData}
               onChange={(e) => setFormData(e.target.value)}
               placeholder='Type a sentence...'
+              // style={{width: '200%'}}
           />
           </Form>
         )}
-        <ListGroup className='d-flex justify-content-between align-items-center'>
-          {songs.map((item) => (
-            <>
-              <ListGroup.Item className='bg-transparent borderless' style={{ border: 'none' }}>
-                <>
-                  <div className='float-left mr-5 ' style={{ margin: '20px auto auto' }}>
-                    {item.name}
-                  </div>
-                  <img src={item.album.images[2].url} alt='song cover art' className='float-right'/>
-                </>
-              </ListGroup.Item>
-            </>
-          ))}
-        </ListGroup>
+        <Fade in={showSongs}>
+          <Table
+            className="table"
+            style={{ width: '45%', margin: '20px auto' }}
+            bg-transparent 
+            borderless
+            responsive
+            ref={myRef}
+          >
+            <tbody>
+              {songs.map((item) => (
+                <tr key={item.id}>
+                  <td>
+                    <Row>
+                      <Col>
+                        <h5>{item.name}</h5>
+                      </Col>
+                      <Col>
+                        <img src={item.album.images[2].url} alt='song cover art' className='float-right'/>
+                      </Col>
+                    </Row>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Fade>
       </Row>
       <Row className='justify-content-center' style={{margin: '50px auto auto'}}>
         {showPlaylist && (

@@ -1,5 +1,5 @@
 import { React, useEffect } from 'react';
-import { Button, Row } from 'react-bootstrap';
+import { Button, Row, Container } from 'react-bootstrap';
 import { authEndpoint, redirectUri, scopes } from './config';
 require('dotenv').config();
 
@@ -13,12 +13,12 @@ const LoginScreen = () => {
   });
 
   return (
-    <>
-      <Row className='justify-content-center' style={{display:'flex'}}>
-        <h1 style={{textAlign: 'center', margin: '200px auto auto'}}> Sentencify</h1>
-      </Row>
-      <Row className='d-flex justify-content-center align-items-center' style={{margin: '50px auto auto'}}>
-        <div className='d-flex justify-content-center'>
+    <div className='d-flex align-items-center min-vh-100'>
+      <Container>
+        <Row className='justify-content-center'>
+          <h1 style={{textAlign: 'center', margin: '-90px auto auto'}}> Sentencify</h1>
+        </Row>
+        <Row className='justify-content-center' style={{margin: '20px auto auto'}}>
           <Button 
             className='btn btn-default text-center rounded-pill' 
             size='lg' 
@@ -27,9 +27,9 @@ const LoginScreen = () => {
           >
             Login To Spotify
           </Button>
-        </div>
-      </Row>
-    </>
+        </Row>
+      </Container>
+    </div>
   );
 }
 
