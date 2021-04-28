@@ -1,6 +1,11 @@
 # Sentencify
 
-A web application using the Spotify API that will allow you to create a playlist based on the words in a sentence that a user types in as input. Each word in the sentence is represented by a song that is added to the playlist.
+A web app using the Spotify API that will allow you to create a playlist based on the words in a sentence that a user types in as input. Each word in the sentence is represented by a song that is added to the playlist. To gain an access token, I implemented Spotify's [implicit grant flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow). Once the access token is retrieved, the processes such as creating a playlist, and addings songs to the playlist could begin. This app was built using 
+
+* **React** 
+* **Bootstrap**
+* **Express** 
+* **Node JS**
 
 # Instructions
 
