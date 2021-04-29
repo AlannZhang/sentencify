@@ -12,8 +12,7 @@ To gain an access token, I implemented Spotify's [implicit grant flow](https://d
 
 # Instructions
 
-To run this app locally, first clone this repo, and get a [Spotify client ID](https://developer.spotify.com/dashboard/). The client ID used for this project is stored in a .env
-file, with the variable REACT_APP_CLIENT_ID=CLIENT_ID.
+To run this app locally, first clone this repo, and get a [Spotify client ID](https://developer.spotify.com/dashboard/). The client ID used for this project is stored in a .env file, with the variable REACT_APP_CLIENT_ID=CLIENT_ID.
 
 Run the following command to install dependencies: 
 ```sh 
