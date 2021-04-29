@@ -6,19 +6,15 @@ import CreatePlaylist from './components/createPlaylist';
 import RedirectPage from './components/redirect';
 
 const App = () => (
-  <div>
-    <Router>
-    <Container fluid style={{ paddingLeft: 10, paddingRight: 10 }}>
-      <div className="main">
-        <Switch>
-          <Route exact path='/' component={LoginScreen} />
-          <Route path='/callback' component={RedirectPage} />
-          <Route path='/create' component={CreatePlaylist} />
-        </Switch>
-      </div>
+  <Router>
+    <Container className="App" fluid style={{ paddingLeft: 5, paddingRight: 5 }}>
+      <Switch>
+        <Route exact path='/' component={LoginScreen} />
+        <Route path='/callback' component={RedirectPage} />
+        <Route path='/create' component={CreatePlaylist} />
+      </Switch>
     </Container>
-    </Router>
-  </div>
+  </Router>
 );
 
 export default App;

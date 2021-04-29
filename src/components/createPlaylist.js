@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Form, Row, Col, Table, Fade } from 'react-bootstrap';
+import { Button, Form, Row, Col, Table, Fade, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const CreatePlaylist = () => {
@@ -122,10 +122,10 @@ const CreatePlaylist = () => {
   return (
     <>
       <Row>
-        <Col className='d-flex flex-row'>
+        <Col className='d-flex flex-row' md={2}>
           <h1 style={{textAlign: 'center', margin: '20px auto auto'}}> Setencify </h1>
         </Col>
-        <Col className='d-flex flex-row-reverse'>
+        <Col className='d-flex flex-row-reverse' md={{ span: 2, offset: 8 }}>
           <style type='text/css'>
             {`
             .btn-logout {
@@ -152,13 +152,6 @@ const CreatePlaylist = () => {
         )}
       </Row>
       <Row className='justify-content-center' style={{margin: '80px auto auto'}}>
-        <style type='text/css'>
-          {`
-          .input{
-            width: 200%;
-          }
-          `}
-        </style>
         {showForm && (
           <Form name='testform' onSubmit={onSubmit}>
             <input 
@@ -168,7 +161,7 @@ const CreatePlaylist = () => {
               value={formData}
               onChange={(e) => setFormData(e.target.value)}
               placeholder='Type a sentence...'
-              // style={{width: '200%'}}
+              style={{width: '450px'}}
           />
           </Form>
         )}
