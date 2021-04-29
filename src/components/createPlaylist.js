@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Form, Row, Col, Table, Fade, Container } from 'react-bootstrap';
+import { Button, Form, Row, Col, Table, Fade } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const CreatePlaylist = () => {
