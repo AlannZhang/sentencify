@@ -9,14 +9,14 @@ const CreatePlaylist = () => {
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
   const [formArr, setFormArr] = useState([]);
-  let songUri = [];
   const [songs, setSongs] = useState([]);
-  let playlistId;
   const [playlistUrl, setPlaylistUrl] = useState('');
   const [showForm, setShowForm] = useState(true);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showSongs, setShowSongs] = useState(false);
   const randomSong = Math.floor(Math.random() * 20);
+  let songUri = [];
+  let playlistId;
 
   // get user id on render
   useEffect(() => {
@@ -125,21 +125,21 @@ const CreatePlaylist = () => {
 
   return (
     <>
+      <style type='text/css'>
+        {`
+        .btn-transparent {
+          color: #006600;
+        }
+        `}
+      </style>
       <Row>
         <Col className='d-flex flex-row' md={3}>
           <h1 style={{textAlign: 'center', margin: '20px auto auto'}}> Setencify </h1>
         </Col>
         <Col className='d-flex flex-row-reverse' md={{ span: 3, offset: 6 }}>
-          <style type='text/css'>
-            {`
-            .btn-logout {
-              color: #006600;
-            }
-            `}
-          </style>
           <Button
             className='bg-transparent font-weight-bold'
-            variant='logout'
+            variant='transparent'
             onClick={logOut}
             style={{ textDecoration: 'none', margin: '35px auto auto' }}
           >
@@ -186,9 +186,7 @@ const CreatePlaylist = () => {
                   <td>
                     <Row>
                       <Col>
-                        <h5
-                          dangerouslySetInnerHTML={{ __html: makeBold(item.name, formArr[i])}}
-                        />
+                        <h5 dangerouslySetInnerHTML={{ __html: makeBold(item.name, formArr[i])}}/>
                       </Col>
                       <Col>
                         <img src={item.album.images[2].url} alt='song cover art' className='float-right'/>
@@ -205,7 +203,7 @@ const CreatePlaylist = () => {
         {showPlaylist && (
           <Button
             className='bg-transparent font-weight-bold'
-            variant='logout'
+            variant='transparent'
             style={{ textDecoration: 'none'}}
             onClick={() => window.open(playlistUrl, '_blank')}
           >

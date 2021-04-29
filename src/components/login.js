@@ -8,9 +8,7 @@ const LoginScreen = () => {
   const responseUri = `&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
   const uri = `${authUri}${responseUri}`
 
-  useEffect(() => {
-    document.body.style.backgroundColor = '#becf94be';
-  });
+  useEffect(() => document.body.style.backgroundColor = '#becf94be');
 
   return (
     <div className='d-flex align-items-center min-vh-100'>
