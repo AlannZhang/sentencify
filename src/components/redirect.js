@@ -8,17 +8,13 @@ const RedirectPage = () => {
   useEffect(() => {
     const retrievedToken = hash.access_token;
 
-    const checkToken = async () => {
-      try {  
-        if (retrievedToken) {
-          const token = retrievedToken;
-          localStorage.setItem('token', JSON.stringify(token));
-          history.push('/create');
-        } else {
-          history.push('/');
-        }
-      } catch (error) {
-        console.error(error);
+    const checkToken = () => {
+      if (retrievedToken) {
+        const token = retrievedToken;
+        localStorage.setItem('token', JSON.stringify(token));
+        history.push('/create');
+      } else {
+        history.push('/');
       }
     }
 
