@@ -8,6 +8,7 @@ const CreatePlaylist = () => {
   const token = JSON.parse(localStorage.getItem('token'));
   const [userId, setUserId] = useState('');
   const [formData, setFormData] = useState('');
+  const [formArr, setFormArr] = useState([]);
   let songUri = [];
   const [songs, setSongs] = useState([]);
   let playlistId;
@@ -16,7 +17,6 @@ const CreatePlaylist = () => {
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showSongs, setShowSongs] = useState(false);
   const randomSong = Math.floor(Math.random() * 20);
-  let formArr = [];
 
   // get user id on render
   useEffect(() => {
@@ -107,7 +107,6 @@ const CreatePlaylist = () => {
     
   const onSubmit = (e) => {
     e.preventDefault();
-    formArr = formData.split(' ');
     createPlaylist();
     getSongs();
     setShowForm(false);
@@ -119,13 +118,18 @@ const CreatePlaylist = () => {
     history.push('/');
   }
 
+  const makeBold = (item, keyword) => {
+    const re = new RegExp(keyword, 'i');
+    return item.replace(re, '<b>' + keyword.toUpperCase() + '</b>');
+  };
+
   return (
     <>
       <Row>
-        <Col className='d-flex flex-row' md={2}>
+        <Col className='d-flex flex-row' md={3}>
           <h1 style={{textAlign: 'center', margin: '20px auto auto'}}> Setencify </h1>
         </Col>
-        <Col className='d-flex flex-row-reverse' md={{ span: 2, offset: 8 }}>
+        <Col className='d-flex flex-row-reverse' md={{ span: 3, offset: 6 }}>
           <style type='text/css'>
             {`
             .btn-logout {
@@ -159,27 +163,32 @@ const CreatePlaylist = () => {
               required
               className='border border-light rounded' 
               value={formData}
-              onChange={(e) => setFormData(e.target.value)}
+              onChange={(e) => {
+                setFormData(e.target.value)
+                setFormArr(e.target.value.split(' '))
+              }}
               placeholder='Type a sentence...'
               style={{width: '450px'}}
           />
           </Form>
         )}
-        <Table
-          className='table'
-          style={{ width: '45%', margin: '20px auto' }}
-          bg-transparent 
-          borderless
-          responsive
-        >
-         <Fade in={showSongs}>
+        <Fade in={showSongs}>
+          <Table
+            className='table'
+            style={{ width: '45%', margin: '20px auto' }}
+            bg-transparent 
+            borderless
+            responsive
+          >
             <tbody>
-              {songs.map((item) => (
+              {songs.map((item, i) => (
                 <tr key={item.id}>
                   <td>
                     <Row>
                       <Col>
-                        <h5>{item.name}</h5>
+                        <h5
+                          dangerouslySetInnerHTML={{ __html: makeBold(item.name, formArr[i])}}
+                        />
                       </Col>
                       <Col>
                         <img src={item.album.images[2].url} alt='song cover art' className='float-right'/>
@@ -189,8 +198,8 @@ const CreatePlaylist = () => {
                 </tr>
               ))}
             </tbody>
-          </Fade>
-        </Table>
+          </Table>
+        </Fade>
       </Row>
       <Row className='justify-content-center' style={{margin: '50px auto auto'}}>
         {showPlaylist && (
