@@ -42,6 +42,27 @@ const CreatePlaylist = () => {
     getUserInfo();
   });
 
+  // create the playlist with name set as form input
+  const createPlaylist = async () => {
+    try {
+      const reqParams = {
+        method: 'post',
+        url: `http://localhost:8000/createPlaylist/${userId}`,
+        data: {
+          'formData': `${formData}`,
+          'token': `${token}`
+        }
+      }
+
+      const results = await axios(reqParams);
+      playlistId = results.data.id;
+      setPlaylistUrl(results.data.url);
+      addSongs();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // search for songs based on each word from the form input
   const getSongs = async () => {
     try {
@@ -84,27 +105,6 @@ const CreatePlaylist = () => {
     }
   };
 
-  // create the playlist with name set as form input
-  const createPlaylist = async () => {
-    try {
-      const reqParams = {
-        method: 'post',
-        url: `http://localhost:8000/createPlaylist/${userId}`,
-        data: {
-          'formData': `${formData}`,
-          'token': `${token}`
-        }
-      }
-
-      const results = await axios(reqParams);
-      playlistId = results.data.id;
-      setPlaylistUrl(results.data.url);
-      addSongs();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-    
   const onSubmit = (e) => {
     e.preventDefault();
     createPlaylist();
