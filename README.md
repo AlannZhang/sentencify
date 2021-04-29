@@ -9,6 +9,9 @@ A web app that uses Spotify's APIs that allows a user to create a playlist based
 
 # Instructions
 
+To run this app locally, you must have your own Spotify Client ID. The client ID used for this project is stored in a .env
+file, with the variable REACT_APP_CLIENT_ID=CLIENT_ID.
+
 Run the following command to install dependencies: 
 ```sh 
 npm i
