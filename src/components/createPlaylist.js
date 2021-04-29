@@ -213,7 +213,6 @@ const CreatePlaylist = () => {
       </Row>
     </>
   );
-
 };
 
 export default CreatePlaylist;
