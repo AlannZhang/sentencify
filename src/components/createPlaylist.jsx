@@ -17,13 +17,6 @@ const CreatePlaylist = () => {
   let songUri = [];
   let playlistId;
   const randomSong = Math.floor(Math.random() * 20);
-  const sentenceOne = 'Welcome to Sentencify, type a sentence to generate a playlist.'
-  const sentenceTwo = 'Each song that is added represents a word from your sentence.'
-  const sentences = [`${sentenceOne} ${sentenceTwo}`];
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [blink, setBlink] = useState(true);
-  const [reverse, setReverse] = useState(false);
 
   // get user id on render
   useEffect(() => {
@@ -130,37 +123,6 @@ const CreatePlaylist = () => {
     return item.replace(re, '<b>' + keyword.toUpperCase() + '</b>');
   };
 
-  // typewriter effect
-  useEffect(() => {
-    if (index === sentences.length) return;
-
-    if (subIndex === sentences[index].length + 1 && index !== sentences.length - 1 && !reverse) {
-      setReverse(true);
-      return;
-    }
-
-    if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => prev + 1);
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      setSubIndex((prev) => prev + (reverse ? -1 : 1));
-    }, 200);
-
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse]);
-
-  // blinker effect
-  useEffect(() => {
-    const timeout2 = setTimeout(() => {
-      setBlink((prev) => !prev);
-    }, 500);
-
-    return () => clearTimeout(timeout2);
-  }, [blink]);
-
   return (
     <>
       <style type='text/css'>
@@ -190,7 +152,8 @@ const CreatePlaylist = () => {
           <h5 
             style={{textAlign: 'center', margin: '100px auto auto'}}
           >
-            {`${sentences[index].substring(0, subIndex)}${blink ? "|" : " "}`}
+            Welcome to Sentencify, type a sentence to generate a playlist.
+            <br/> Each song that is added represents a word from your sentence.
           </h5>
         )}
       </Row>
