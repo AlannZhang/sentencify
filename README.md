@@ -10,6 +10,8 @@ To gain an access token, I implemented Spotify's [implicit grant flow](https://d
 * **Express** 
 * **Node JS**
 
+You can view this web app live at https://sentencify.netlify.app or run it locally.
+
 # Instructions
 
 To run this app locally, first clone this repo, and get a [Spotify client ID](https://developer.spotify.com/dashboard/). The client ID used for this project is stored in a .env file, which has the variable REACT_APP_CLIENT_ID=CLIENT_ID.
