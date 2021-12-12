@@ -1,7 +1,7 @@
+import axios from 'axios';
 const router = require('express').Router();
-const axios = require('axios');
 
-router.post('/:userId', (async (req, res) => {
+router.post('/createPlaylist/:userId', (async (req, res) => {
   try {
     // sending the playlist creation request from the backend
     // due to cors issues in the frontend
@@ -28,4 +28,4 @@ router.post('/:userId', (async (req, res) => {
   }
 }));
 
-module.exports = router;
+export default router;

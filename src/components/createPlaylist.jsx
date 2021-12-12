@@ -47,7 +47,7 @@ const CreatePlaylist = () => {
     try {
       const reqParams = {
         method: 'post',
-        url: `https://sentencify.netlify.app/.netlify/netlify_functions/server/createPlaylist/${userId}`,
+        url: `.netlify/netlify_functions/server/createPlaylist/${userId}`,
         data: {
           'formData': `${formData}`,
           'token': `${token}`
