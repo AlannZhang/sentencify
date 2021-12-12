@@ -47,7 +47,7 @@ const CreatePlaylist = () => {
     try {
       const reqParams = {
         method: 'post',
-        url: `http://localhost:8000/createPlaylist/${userId}`,
+        url: `.netlify/netlify_functions/server/${userId}`,
         data: {
           'formData': `${formData}`,
           'token': `${token}`
