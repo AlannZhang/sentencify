@@ -44,24 +44,48 @@ const CreatePlaylist = () => {
 
   // create the playlist with name set as form input
   const createPlaylist = async () => {
+    console.log(token);
     try {
       const reqParams = {
         method: 'post',
-        url: `.netlify/netlify_functions/server/createPlaylist/${userId}`,
+        url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
         data: {
-          'formData': `${formData}`,
-          'token': `${token}`
+          'name': formData,
+          'description': 'Playlist generated from the sentencify app: https://sentencify.netlify.app',
+          'public': true,
         }
       }
 
       const results = await axios(reqParams);
       playlistId = results.data.id;
-      setPlaylistUrl(results.data.url);
+      setPlaylistUrl(results.data.external_urls.spotify);
       addSongs();
     } catch (err) {
       console.error(err);
     }
   };
+  // const createPlaylist = async () => {
+  //   try {
+  //     const reqParams = {
+  //       method: 'post',
+  //       url: `.netlify/netlify_functions/server/createPlaylist/${userId}`,
+  //       data: {
+  //         'formData': `${formData}`,
+  //         'token': `${token}`
+  //       }
+  //     }
+
+  //     const results = await axios(reqParams);
+  //     playlistId = results.data.id;
+  //     setPlaylistUrl(results.data.url);
+  //     addSongs();
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   // search for songs based on each word from the form input
   const getSongs = async () => {
