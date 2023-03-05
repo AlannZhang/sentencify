@@ -95,7 +95,7 @@ const CreatePlaylist = () => {
             'Authorization': `Bearer ${token}`,
           },
           data: {
-            'uris': songUri[i],
+            'uris': [songUri[i]],
             'position': i,
           }
         };
