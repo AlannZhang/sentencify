@@ -44,7 +44,6 @@ const CreatePlaylist = () => {
 
   // create the playlist with name set as form input
   const createPlaylist = async () => {
-    console.log(token);
     try {
       const reqParams = {
         method: 'post',
