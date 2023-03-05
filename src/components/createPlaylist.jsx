@@ -53,7 +53,6 @@ const CreatePlaylist = () => {
           'token': `${token}`
         }
       }
-
       const results = await axios(reqParams);
       playlistId = results.data.id;
       setPlaylistUrl(results.data.url);
@@ -91,9 +90,13 @@ const CreatePlaylist = () => {
       for (let i = 0; i < songUri.length; i++) {
         const reqParams = {
           method: 'post',
-          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?position=${i}&uris=${songUri[i]}`,
+          url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
           headers: {
             'Authorization': `Bearer ${token}`,
+          },
+          data: {
+            'uris': songUri[i],
+            'position': i,
           }
         };
 
